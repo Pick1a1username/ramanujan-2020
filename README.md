@@ -1,5 +1,27 @@
 # ramanujan
 
+## Preface
+
+This app is initially developed for the book ''. And I cloned from the following commit:
+
+https://github.com/senecajs/ramanujan/commit/69e61a90ada50d1f20999dc7e3af2e5c4737e02c
+
+
+I'd like to customize this app to my personal preferences as follow:
+
+* separate package.json
+* make it work on k8s
+* make it work with skaffold
+* make it work with node 12
+  ->replace packages deprecated or not maintained anymore
+* rewrite it in typescript
+* add some more descriptions to README.md if possible
+
+I hope that I can learn about microservices by doing things I mentioned above.
+
+
+## Original Preface
+
 This project is an implementation of a microblogging system (similar
 to the basic functionality of [Twitter](http://twitter.com)) using the
 [microservice architecture](http://www.richardrodger.com/seneca-microservices-nodejs#.VyCjoWQrL-k)
