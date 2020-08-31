@@ -1,0 +1,27 @@
+{
+  "name": "ramanujan-front",
+  "version": "0.0.1",
+  "description": "ramanujan-front",
+  "main": "front.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pick1a1username/ramanujan-2020.git"
+  },
+  "keywords": [
+    "seneca",
+    "demo",
+    "ramanujan"
+  ],
+  "author": "Richard Rodger richardrodger.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pick1a1username/ramanujan-2020/issues"
+  },
+  "homepage": "https://github.com/Pick1a1username/ramanujan-2020",
+  "dependencies": {
+    "hapi": "15.0.3",
+    "inert": "4.0.2",
+    "rif": "0.3.0",
+    "wo": "0.8.0"
+  }
+}

@@ -9,7 +9,7 @@ https://github.com/senecajs/ramanujan/commit/69e61a90ada50d1f20999dc7e3af2e5c473
 
 I'd like to customize this app to my personal preferences as follow:
 
-* separate package.json
+* separate package.json ->Done
 * make it work on k8s
 * make it work with skaffold
 * make it work with node 12
