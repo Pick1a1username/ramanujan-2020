@@ -1,0 +1,28 @@
+{
+  "name": "ramanujan-api",
+  "version": "0.0.1",
+  "description": "ramanujan-api",
+  "main": "api-service.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pick1a1username/ramanujan-2020.git"
+  },
+  "keywords": [
+    "seneca",
+    "demo",
+    "ramanujan"
+  ],
+  "author": "Richard Rodger richardrodger.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pick1a1username/ramanujan-2020/issues"
+  },
+  "homepage": "https://github.com/Pick1a1username/ramanujan-2020",
+  "dependencies": {
+    "chairo": "2.2.1",
+    "hapi": "15.0.3",
+    "seneca": "3.3.0",
+    "seneca-demo-logger": "0.2.0",
+    "rif": "0.3.0"
+  }
+}
