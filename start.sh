@@ -22,7 +22,9 @@ cd api
 node api-service.js 0 $HOST $BASES $OPTS &
 cd $EXEC_DIR
 sleep 1
-node post/post-service.js $HOST $BASES $OPTS &
+cd post
+node post-service.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
 cd entry-store
 node entry-store-service.js $HOST $BASES $OPTS &
@@ -32,17 +34,25 @@ cd entry-cache
 node entry-cache-service.js $HOST $BASES $OPTS &
 cd $EXEC_DIR
 sleep 1
-node repl/repl-service.js 10001 $HOST $HOST $BASES $OPTS &
+cd repl
+node repl-service.js 10001 $HOST $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
-node mine/mine-service.js 0 $HOST $BASES $OPTS &
+cd mine
+node mine-service.js 0 $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
 cd home
 node home-service.js 0 $HOST $BASES $OPTS &
 cd $EXEC_DIR
 sleep 1
-node search/search-service.js 0 $HOST $BASES $OPTS &
+cd search
+node search-service.js 0 $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
-node index/index-service.js $HOST $BASES $OPTS &
+cd index
+node index-service.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
 cd follow
 node follow-service.js $HOST $BASES $OPTS &
@@ -52,13 +62,26 @@ cd fanout
 node fanout-service.js $HOST $BASES $OPTS &
 cd $EXEC_DIR
 sleep 1
-node timeline/timeline-service.js 0 $HOST $BASES $OPTS &
+cd timeline
+node timeline-service.js 0 $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
-node timeline/timeline-service.js 1 $HOST $BASES $OPTS &
+cd timeline
+node timeline-service.js 1 $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
-node timeline/timeline-shard-service.js $HOST $BASES $OPTS &
+cd timeline
+node timeline-shard-service.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
-node reserve/reserve-service.js $HOST $BASES $OPTS &
+cd reserve
+node reserve-service.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
+# monitor.js is supposed not to be executed?
+# sleep 1
+# cd monitor
+# node monitor.js &
+# cd $EXEC_DIR
 
 
 

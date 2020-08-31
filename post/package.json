@@ -1,0 +1,32 @@
+{
+  "name": "ramanujan-post",
+  "version": "0.0.1",
+  "description": "ramanujan-post",
+  "main": "post-service.js",
+  "scripts": {
+    "test": "lab -v test -I nil"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pick1a1username/ramanujan-2020.git"
+  },
+  "keywords": [
+    "seneca",
+    "demo",
+    "ramanujan"
+  ],
+  "author": "Richard Rodger richardrodger.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pick1a1username/ramanujan-2020/issues"
+  },
+  "homepage": "https://github.com/Pick1a1username/ramanujan-2020",
+  "dependencies": {
+    "seneca": "3.3.0",
+    "seneca-demo-logger": "0.2.0"
+  },
+  "devDependencies": {
+    "code": "3.0.2",
+    "lab": "11.0.1"
+  }
+}
