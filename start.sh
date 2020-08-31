@@ -14,7 +14,9 @@ cd base
 node base.js base1 39001 $HOST $BASES $OPTS &
 cd $EXEC_DIR
 sleep 1
-node front/front.js $HOST $BASES $OPTS &
+cd front
+node front.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
 cd api
 node api-service.js 0 $HOST $BASES $OPTS &
@@ -34,15 +36,21 @@ node repl/repl-service.js 10001 $HOST $HOST $BASES $OPTS &
 sleep 1
 node mine/mine-service.js 0 $HOST $BASES $OPTS &
 sleep 1
-node home/home-service.js 0 $HOST $BASES $OPTS &
+cd home
+node home-service.js 0 $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
 node search/search-service.js 0 $HOST $BASES $OPTS &
 sleep 1
 node index/index-service.js $HOST $BASES $OPTS &
 sleep 1
-node follow/follow-service.js $HOST $BASES $OPTS &
+cd follow
+node follow-service.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
-node fanout/fanout-service.js $HOST $BASES $OPTS &
+cd fanout
+node fanout-service.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
 node timeline/timeline-service.js 0 $HOST $BASES $OPTS &
 sleep 1
