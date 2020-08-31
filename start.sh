@@ -6,9 +6,13 @@ EXEC_DIR=`pwd`
 # for demos use OPTS = '--seneca.options.debug.undead=true --seneca.options.plugin.mesh.sneeze.silent=1'
 
 
-node base/base.js base0 39000 $HOST $BASES $OPTS &
+cd base
+node base.js base0 39000 $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
-node base/base.js base1 39001 $HOST $BASES $OPTS &
+cd base
+node base.js base1 39001 $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
 node front/front.js $HOST $BASES $OPTS &
 sleep 1
@@ -18,9 +22,13 @@ cd $EXEC_DIR
 sleep 1
 node post/post-service.js $HOST $BASES $OPTS &
 sleep 1
-node entry-store/entry-store-service.js $HOST $BASES $OPTS &
+cd entry-store
+node entry-store-service.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
-node entry-cache/entry-cache-service.js $HOST $BASES $OPTS &
+cd entry-cache
+node entry-cache-service.js $HOST $BASES $OPTS &
+cd $EXEC_DIR
 sleep 1
 node repl/repl-service.js 10001 $HOST $HOST $BASES $OPTS &
 sleep 1
