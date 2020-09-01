@@ -7,6 +7,12 @@ var HOST = process.env.HOST || process.argv[4] || '127.0.0.1'
 var BASES = (process.env.BASES || process.argv[5] || '').split(',')
 var SILENT = process.env.SILENT || process.argv[6] || 'true'
 
+// var TAG = 'base0'
+// var PORT = 39000
+// var HOST = '127.0.0.1'
+// var BASES = '127.0.0.1:39000,127.0.0.1:39001'
+// var SILENT = 'true'
+
 
 require('seneca')({
   tag: TAG,
