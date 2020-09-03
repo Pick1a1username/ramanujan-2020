@@ -50,8 +50,6 @@ function node4() {
   sleep 1
   run_app api/api-service.js 0 $HOST $BASES $OPTS
   sleep 1
-  run_app post/post-service.js $HOST $BASES $OPTS
-  sleep 1
   run_app entry-store/entry-store-service.js $HOST $BASES $OPTS
   sleep 1
   run_app entry-cache/entry-cache-service.js $HOST $BASES $OPTS
@@ -96,6 +94,8 @@ function node12() {
   run_app base/base.js base0 39000 $HOST $BASES $OPTS
   sleep 1
   run_app base/base.js base1 39001 $HOST $BASES $OPTS
+  sleep 1
+  run_app post/post-service.js $HOST $BASES $OPTS
   sleep 1
 }
 
