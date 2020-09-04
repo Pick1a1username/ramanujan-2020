@@ -52,8 +52,6 @@ function node4() {
   sleep 1
   run_app repl/repl-service.js 10001 $HOST $HOST $BASES $OPTS
   sleep 1
-  run_app mine/mine-service.js 0 $HOST $BASES $OPTS
-  sleep 1
   run_app home/home-service.js 0 $HOST $BASES $OPTS
   sleep 1
   run_app search/search-service.js 0 $HOST $BASES $OPTS
@@ -96,6 +94,8 @@ function node12() {
   run_app follow/follow-service.js $HOST $BASES $OPTS
   sleep 1
   run_app reserve/reserve-service.js $HOST $BASES $OPTS
+  sleep 1
+  run_app mine/mine-service.js 0 $HOST $BASES $OPTS
   sleep 1
 }
 
