@@ -60,8 +60,6 @@ function node4() {
   sleep 1
   run_app index/index-service.js $HOST $BASES $OPTS
   sleep 1
-  run_app follow/follow-service.js $HOST $BASES $OPTS
-  sleep 1
   run_app timeline/timeline-service.js 0 $HOST $BASES $OPTS
   sleep 1
   run_app timeline/timeline-service.js 1 $HOST $BASES $OPTS
@@ -96,6 +94,8 @@ function node12() {
   run_app entry-cache/entry-cache-service.js $HOST $BASES $OPTS
   sleep 1
   run_app fanout/fanout-service.js $HOST $BASES $OPTS
+  sleep 1
+  run_app follow/follow-service.js $HOST $BASES $OPTS
   sleep 1
 }
 
