@@ -5,7 +5,7 @@ var BASES = (process.env.BASES || process.argv[5] || '').split(',')
 var SILENT = process.env.SILENT || process.argv[6] || 'true'
 
 
-var repl = require('seneca-repl');
+// var repl = require('seneca-repl');
 
 
 var seneca = require('seneca')({
@@ -33,13 +33,13 @@ var seneca = require('seneca')({
     swim: {interval: 1111}
   }
 })
-.use(repl)
-.ready(function () {
-  seneca.repl({
-    port: REPL_PORT,
-    host: REPL_HOST,
-      alias: {
-      m: 'role:mesh,get:members'
-    }
-  })
+.use('repl', {
+  port: REPL_PORT,
+  host: REPL_HOST,
+  alias: {
+    'm': 'role:mesh,get:members'
+  }
+})
+.ready(function() {
+  console.log(this.id);
 })
