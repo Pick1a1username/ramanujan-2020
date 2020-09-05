@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Sometimes services using hapi exit immediately.
+#
+# api: (By Node 12) HOST=127.0.0.1 node api-service.js 0 127.0.0.1 127.0.0.1:39000,127.0.0.1:39001
+# home: (By Node 12) HOST=127.0.0.1 node home-service.js 0 127.0.0.1 127.0.0.1:39000,127.0.0.1:39001
+# search: (By Node 12) HOST=127.0.0.1 node search-service.js 0 127.0.0.1 127.0.0.1:39000,127.0.0.1:39001
+# mine: (By Node 12) HOST=127.0.0.1 node mine-service.js 0 127.0.0.1 127.0.0.1:39000,127.0.0.1:39001
+
 HOST="127.0.0.1"
 BASES="127.0.0.1:39000,127.0.0.1:39001"
 OPTS=""
@@ -46,8 +53,7 @@ function run_app() {
 function node4() {
   change_node_ver 4
 
-  run_app front/front.js $HOST $BASES $OPTS
-  sleep 3
+
   run_app index/index-service.js $HOST $BASES $OPTS
   sleep 1
   run_app timeline/timeline-service.js 0 $HOST $BASES $OPTS
@@ -71,6 +77,8 @@ function node4() {
 function node12() {
   change_node_ver 12
 
+  run_app front/front.js $HOST $BASES $OPTS
+  sleep 3
   run_app base/base.js base0 39000 $HOST $BASES $OPTS
   sleep 1
   run_app base/base.js base1 39001 $HOST $BASES $OPTS
