@@ -127,8 +127,14 @@ const init = async () => {
               swim: {interval: 1111}
             }
         })
-
-  await server.start();
+        
+  // https://itnext.io/getting-started-with-hapi-js-e841724da924
+  try {
+    await server.start();
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  };
 
   console.log(tag,server.info.host,server.info.port)
 };

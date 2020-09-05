@@ -19,18 +19,18 @@
   },
   "homepage": "https://github.com/Pick1a1username/ramanujan-2020",
   "dependencies": {
-    "chairo": "2.2.1",
-    "handlebars": "4.0.5",
-    "hapi": "15.0.3",
-    "inert": "4.0.2",
-    "lodash": "4.15.0",
-    "moment": "2.14.1",
+    "chairo": "4.0.0",
+    "handlebars": "4.7.6",
+    "@hapi/hapi": "20.0.0",
+    "@hapi/inert": "6.0.2",
+    "lodash": "4.17.20",
+    "moment": "2.27.0",
     "rif": "0.3.0",
-    "seneca": "3.3.0",
-    "seneca-balance-client": "0.6.0",
+    "seneca": "3.22.0",
+    "seneca-balance-client": "1.2.0",
     "seneca-demo-logger": "0.2.0",
-    "seneca-mesh": "0.10.0",
-    "vision": "4.1.0",
-    "wo": "0.8.0"
+    "seneca-mesh": "1.5.0",
+    "@hapi/vision": "6.0.1",
+    "wo": "1.0.0"
   }
 }

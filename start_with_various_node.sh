@@ -47,9 +47,7 @@ function node4() {
   change_node_ver 4
 
   run_app front/front.js $HOST $BASES $OPTS
-  sleep 1
-  run_app search/search-service.js 0 $HOST $BASES $OPTS
-  sleep 1
+  sleep 3
   run_app index/index-service.js $HOST $BASES $OPTS
   sleep 1
   run_app timeline/timeline-service.js 0 $HOST $BASES $OPTS
@@ -90,13 +88,15 @@ function node12() {
   run_app reserve/reserve-service.js $HOST $BASES $OPTS
   sleep 1
   run_app mine/mine-service.js 0 $HOST $BASES $OPTS
-  sleep 1
+  sleep 3
   run_app api/api-service.js 0 $HOST $BASES $OPTS
-  sleep 1
+  sleep 3
   run_app repl/repl-service.js 10001 $HOST $HOST $BASES $OPTS
   sleep 1
   run_app home/home-service.js 0 $HOST $BASES $OPTS
-  sleep 1
+  sleep 3
+  run_app search/search-service.js 0 $HOST $BASES $OPTS
+  sleep 3
 }
 
 
