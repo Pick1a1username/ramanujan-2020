@@ -81,31 +81,22 @@ const init = async () => {
 
   server.route({
     method: 'GET', path: '/mine/{user}',
-    handler: function( req, reply )
+    handler: async function( req, reply )
     {
       let entryListReceived = [];
-
-      server.seneca.act(
-        'store:list,kind:entry',
-        {user:req.params.user},
-        function( err, entrylist ) {
-          console.log('entry received')
-          console.log(entrylist)
+      
+      try {
+        entryListReceived = await server.seneca.actAsync(
+          'store:list,kind:entry',
+          {user:req.params.user},
+          )
+        } catch (err) {
+          console.log('Something went wrong!')
           console.log(err)
-          if(err) {
-            entrylist = []
-          }
-
-          entryListReceived = entrylist;
-
-          // reply.view('mine',{
-          //   user: req.params.user,
-          //   entrylist: _.map(entrylist,function(entry){
-          //     entry.when = moment(entry.when).fromNow()
-          //     return entry
-          //   })
-          // })
-        })
+        }
+      
+      console.log('entry received')
+      console.log(entryListReceived)
       
       return reply.view('mine',{
         user: req.params.user,
