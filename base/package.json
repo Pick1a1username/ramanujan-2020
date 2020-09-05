@@ -21,7 +21,8 @@
   "dependencies": {
     "seneca": "3.22.0",
     "seneca-balance-client": "1.2.0",
+    "seneca-demo-logger": "0.2.0",
     "seneca-mesh": "1.5.0",
-    "seneca-demo-logger": "0.2.0"
+    "sneeze": "^3.0.0"
   }
 }

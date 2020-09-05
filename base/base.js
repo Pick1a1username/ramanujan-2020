@@ -13,6 +13,7 @@ var SILENT = process.env.SILENT || process.argv[6] || 'true'
 // var BASES = '127.0.0.1:39000,127.0.0.1:39001'
 // var SILENT = 'true'
 
+// require('sneeze')({base:true}).join()
 
 require('seneca')({
   tag: TAG,

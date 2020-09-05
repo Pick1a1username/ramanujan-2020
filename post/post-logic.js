@@ -5,6 +5,8 @@ module.exports = function post (options) {
     var entry = this.util.clean(msg)
     delete entry.post
 
+    console.log('Trying to save an entry...')
+    console.log(entry)
     entry.when = Date.now()
 
     this.act('store:save,kind:entry', entry, function(err,entry) {

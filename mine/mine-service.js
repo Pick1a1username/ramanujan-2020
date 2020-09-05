@@ -18,12 +18,13 @@ var Rif        = require('rif')
 var rif = Rif()
 var host = rif(HOST) || HOST
 
+const server = hapi.Server({
+  port: PORT,
+  host: host
+})
 
 const init = async () => {
-  const server = hapi.Server({
-    port: PORT,
-    host: host
-  })
+
 
   /**
    * It seems that if multiple plugins are registered by multiple
@@ -49,6 +50,7 @@ const init = async () => {
         })
           //.use('zipkin-tracer', {sampling:1})
           .use('entity')
+          .test()
       }
     },
     {
@@ -67,6 +69,7 @@ const init = async () => {
     }
   ])
 
+  console.log('plugins(1) setting done')
 
   server.views({
     engines: { html: handlebars },
@@ -74,37 +77,62 @@ const init = async () => {
     layout: true
   })
 
+  console.log('views setting done')
 
   server.route({
     method: 'GET', path: '/mine/{user}',
     handler: function( req, reply )
     {
+      let entryListReceived = [];
+
       server.seneca.act(
         'store:list,kind:entry',
         {user:req.params.user},
         function( err, entrylist ) {
+          console.log('entry received')
+          console.log(entrylist)
+          console.log(err)
           if(err) {
             entrylist = []
           }
 
-          reply.view('mine',{
-            user: req.params.user,
-            entrylist: _.map(entrylist,function(entry){
-              entry.when = moment(entry.when).fromNow()
-              return entry
-            })
-          })
+          entryListReceived = entrylist;
+
+          // reply.view('mine',{
+          //   user: req.params.user,
+          //   entrylist: _.map(entrylist,function(entry){
+          //     entry.when = moment(entry.when).fromNow()
+          //     return entry
+          //   })
+          // })
         })
+      
+      return reply.view('mine',{
+        user: req.params.user,
+        entrylist: _.map(entryListReceived,function(entry){
+          entry.when = moment(entry.when).fromNow()
+          return entry
+        })
+      })
     }
   })
 
+  console.log('routes setting done')
 
-  await server.start(function() {
-    server.seneca.use('mesh',{
-      bases:BASES,
-      host:host
-    })
-  });
+
+
+  console.log(BASES, host)
+
+
+  await server.start();
+
+  // console.log(server.registrations.chairo.options.seneca.use)
+  server.registrations.chairo.options.seneca.use('mesh',{
+    bases:BASES,
+    host:host
+  }) 
+
+  console.log('mesh setting done')
 
   console.log('Server running on %s', server.info.uri);
 };
