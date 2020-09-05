@@ -27,11 +27,7 @@ module.exports = function entry_cache (options) {
 
 
   seneca.add('store:list,kind:entry', function(msg, done) {
-    console.log('store:list received')
-    console.log(msg)
     if( cache[msg.user] ) {
-      console.log('Returning data from the cache...')
-      console.log(cache[msg.user])
       return done( null, cache[msg.user] )
     }
 

@@ -18,14 +18,12 @@ var Rif        = require('rif')
 var rif = Rif()
 var host = rif(HOST) || HOST
 
-const server = hapi.Server({
-  port: PORT,
-  host: host
-})
-
 const init = async () => {
-
-
+  const server = hapi.Server({
+    port: PORT,
+    host: host
+  })
+  
   /**
    * It seems that if multiple plugins are registered by multiple
    * server.register(), the script is finished before registering plugins.
@@ -69,15 +67,11 @@ const init = async () => {
     }
   ])
 
-  console.log('plugins(1) setting done')
-
   server.views({
     engines: { html: handlebars },
     path: __dirname + '/www',
     layout: true
   })
-
-  console.log('views setting done')
 
   server.route({
     method: 'GET', path: '/mine/{user}',
@@ -95,9 +89,6 @@ const init = async () => {
           console.log(err)
         }
       
-      console.log('entry received')
-      console.log(entryListReceived)
-      
       return reply.view('mine',{
         user: req.params.user,
         entrylist: _.map(entryListReceived,function(entry){
@@ -108,22 +99,12 @@ const init = async () => {
     }
   })
 
-  console.log('routes setting done')
-
-
-
-  console.log(BASES, host)
-
-
   await server.start();
 
-  // console.log(server.registrations.chairo.options.seneca.use)
   server.registrations.chairo.options.seneca.use('mesh',{
     bases:BASES,
     host:host
   }) 
-
-  console.log('mesh setting done')
 
   console.log('Server running on %s', server.info.uri);
 };
