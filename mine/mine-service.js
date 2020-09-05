@@ -48,7 +48,6 @@ const init = async () => {
         })
           //.use('zipkin-tracer', {sampling:1})
           .use('entity')
-          .test()
       }
     },
     {
@@ -99,12 +98,12 @@ const init = async () => {
     }
   })
 
-  await server.start();
-
   server.registrations.chairo.options.seneca.use('mesh',{
     bases:BASES,
     host:host
   }) 
+
+  await server.start();
 
   console.log('Server running on %s', server.info.uri);
 };
