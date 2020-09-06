@@ -37,54 +37,47 @@ module.exports = function index (options) {
   // Query the search index.
   // The implementation logic consists of calls to the search index API.
   function search_query (msg, done) {
-    console.log(terms)
+    console.log('SEARCH')
 
-    // var terms = msg.query.split(/ +/)
     var terms = msg.query.split(/ +/).map(term => `text:${term}`);
-    console.log(terms)
 
-    var query = {
-      query: {
-        AND: {text:terms}
-      }
-    }
+    index.SEARCH(...terms)
+      .then(function (out) {
+        console.log(out)
+        var hits = out;
 
-    // index.SEARCH(query)
-    index.AND(...terms)
-    .then(index.DOCUMENTS)
-    .then(function (out) {
-      console.log(out)
-      console.log(out.hits)
-      // var hits = (out && out.hits) || []
-      var hits = out;
+        hits = hits.map(function (hit) {
+          return hit.obj
+        })
 
-      hits = hits.map(function (hit) {
-        return hit.obj
+        done(null, hits)
       })
-
-      done(null, hits)
-    })
+      .catch(function (err) {
+        console.log('Something went wrong!');
+        console.log(err);
+        done(null, [])
+      })
   }
 
 
   // Insert a document into the search index.
   function search_insert (msg, done) {
-    // index.add([{
-    //   id: msg.id,
-    //   text: msg.text,
-    //   user: msg.user,
-    //   when: msg.when
-    // }], {}, done)
+    console.log('PUT')
     index.PUT([{
       id: msg.id,
       text: msg.text,
       user: msg.user,
       when: msg.when
     }])
-    .then(function(result) {
-      console.log(result)
-      done({})
-    });
+      .then(function(result) {
+        console.log(result)
+        done({})
+      })
+      .catch(function (err) {
+        console.log('Something went wrong!');
+        console.log(err);
+        done({})
+      })
   }
 
 
