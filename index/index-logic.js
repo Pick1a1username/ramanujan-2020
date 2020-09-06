@@ -8,6 +8,7 @@
 var Levelup = require('levelup')
 var Memdown = require('memdown')
 var Search  = require('search-index')
+const encodingDown = require('encoding-down')
 
 
 // This is the standard way to define a Seneca plugin.
@@ -38,7 +39,9 @@ module.exports = function index (options) {
   function search_query (msg, done) {
     console.log(terms)
 
-    var terms = msg.query.split(/ +/)
+    // var terms = msg.query.split(/ +/)
+    var terms = msg.query.split(/ +/).map(term => `text:${term}`);
+    console.log(terms)
 
     var query = {
       query: {
@@ -46,11 +49,17 @@ module.exports = function index (options) {
       }
     }
 
-    index.search(query, function (err, out) {
-      var hits = (out && out.hits) || []
+    // index.SEARCH(query)
+    index.AND(...terms)
+    .then(index.DOCUMENTS)
+    .then(function (out) {
+      console.log(out)
+      console.log(out.hits)
+      // var hits = (out && out.hits) || []
+      var hits = out;
 
       hits = hits.map(function (hit) {
-        return hit.document
+        return hit.obj
       })
 
       done(null, hits)
@@ -60,12 +69,22 @@ module.exports = function index (options) {
 
   // Insert a document into the search index.
   function search_insert (msg, done) {
-    index.add([{
+    // index.add([{
+    //   id: msg.id,
+    //   text: msg.text,
+    //   user: msg.user,
+    //   when: msg.when
+    // }], {}, done)
+    index.PUT([{
       id: msg.id,
       text: msg.text,
       user: msg.user,
       when: msg.when
-    }], {}, done)
+    }])
+    .then(function(result) {
+      console.log(result)
+      done({})
+    });
   }
 
 
@@ -73,10 +92,12 @@ module.exports = function index (options) {
   // plugin - by defining a special pattern of the form init:<plugin-name>.
   function init (msg, done) {
     Search({
-      indexes: Levelup('si', {
-        db: Memdown, 
-        valueEncoding: 'json'
-      })
+      indexes: Levelup(
+        encodingDown(
+          Memdown(),
+          { valueEncoding: 'json' }
+        )
+      )
     }, function(err, si) {
       if (err) return done(err)
       index = si

@@ -53,15 +53,8 @@ function run_app() {
 function node4() {
   change_node_ver 4
 
+  # Nothing to run.
 
-  run_app index/index-service.js $HOST $BASES $OPTS
-  sleep 1
-
-  # monitor.js is supposed not to be executed?
-  # sleep 1
-  # cd monitor
-  # node monitor.js &
-  # cd $EXEC_DIR
 }
 
 
@@ -103,6 +96,8 @@ function node12() {
   run_app timeline/timeline-service.js 1 $HOST $BASES $OPTS
   sleep 1
   run_app timeline/timeline-shard-service.js $HOST $BASES $OPTS
+  sleep 1
+  run_app index/index-service.js $HOST $BASES $OPTS
   sleep 1
 
 }
