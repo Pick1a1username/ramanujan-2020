@@ -59,9 +59,9 @@ function node4() {
 
 
 
-# Run apps with Node 12
-function node12() {
-  change_node_ver 12
+# Run apps with Node 14
+function node14() {
+  change_node_ver 14
 
   run_app front/front.js $HOST $BASES $OPTS
   sleep 3
@@ -110,7 +110,7 @@ function main() {
   source ~/.bashrc
 
   node4
-  node12
+  node14
 
   change_node_ver $CURR_NODE_VER
   exit 0
