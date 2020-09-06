@@ -5,13 +5,13 @@ var SILENT = process.env.SILENT || process.argv[4] || 'true'
 
 require('seneca')({
   tag: 'index',
-  internal: {logger: require('seneca-demo-logger')},
-  debug: {short_logs: true}
+  // internal: {logger: require('seneca-demo-logger')},
+  // debug: {short_logs: true}
 })
     //.use('zipkin-tracer', {sampling:1})
 
   .use('index-logic')
-
+  .test()
   .add('info:entry', function(msg,done){
     delete msg.info
     this.act('search:insert',msg,done)

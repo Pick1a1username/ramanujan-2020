@@ -8,6 +8,7 @@
 var Levelup = require('levelup')
 var Memdown = require('memdown')
 var Search  = require('search-index')
+const encodingDown = require('encoding-down')
 
 
 // This is the standard way to define a Seneca plugin.
@@ -36,36 +37,47 @@ module.exports = function index (options) {
   // Query the search index.
   // The implementation logic consists of calls to the search index API.
   function search_query (msg, done) {
-    console.log(terms)
+    console.log('SEARCH')
 
-    var terms = msg.query.split(/ +/)
+    var terms = msg.query.split(/ +/).map(term => `text:${term}`);
 
-    var query = {
-      query: {
-        AND: {text:terms}
-      }
-    }
+    index.SEARCH(...terms)
+      .then(function (out) {
+        console.log(out)
+        var hits = out;
 
-    index.search(query, function (err, out) {
-      var hits = (out && out.hits) || []
+        hits = hits.map(function (hit) {
+          return hit.obj
+        })
 
-      hits = hits.map(function (hit) {
-        return hit.document
+        done(null, hits)
       })
-
-      done(null, hits)
-    })
+      .catch(function (err) {
+        console.log('Something went wrong!');
+        console.log(err);
+        done(null, [])
+      })
   }
 
 
   // Insert a document into the search index.
   function search_insert (msg, done) {
-    index.add([{
+    console.log('PUT')
+    index.PUT([{
       id: msg.id,
       text: msg.text,
       user: msg.user,
       when: msg.when
-    }], {}, done)
+    }])
+      .then(function(result) {
+        console.log(result)
+        done({})
+      })
+      .catch(function (err) {
+        console.log('Something went wrong!');
+        console.log(err);
+        done({})
+      })
   }
 
 
@@ -73,10 +85,12 @@ module.exports = function index (options) {
   // plugin - by defining a special pattern of the form init:<plugin-name>.
   function init (msg, done) {
     Search({
-      indexes: Levelup('si', {
-        db: Memdown, 
-        valueEncoding: 'json'
-      })
+      indexes: Levelup(
+        encodingDown(
+          Memdown(),
+          { valueEncoding: 'json' }
+        )
+      )
     }, function(err, si) {
       if (err) return done(err)
       index = si

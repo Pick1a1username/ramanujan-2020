@@ -5,9 +5,13 @@ var SILENT = process.env.SILENT || process.argv[4] || 'true'
 require('seneca')({
   tag:'entry-cache',
   internal: {logger: require('seneca-demo-logger')},
-  debug: {short_logs:true}
+  // debug: {short_logs:true}
+  debug: {
+    undead: true
+  }
 })
     //.use('zipkin-tracer', {sampling:1})
+  .test()
   .use('basic')
   .use('entity')
   .use('entry-cache-logic')

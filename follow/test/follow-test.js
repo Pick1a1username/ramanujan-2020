@@ -4,8 +4,8 @@
 // The utility function test_seneca constructs an instance of Seneca
 // suitable for test execution, using the seneca.test() method.
 
-var Lab = require('lab')
-var Code = require('code')
+var Lab = require('@hapi/lab')
+var Code = require('@hapi/code')
 var Seneca = require('seneca')
 
 var lab = exports.lab = Lab.script()

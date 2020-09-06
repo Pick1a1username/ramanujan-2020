@@ -77,13 +77,3 @@ sleep 1
 cd reserve
 node reserve-service.js $HOST $BASES $OPTS &
 cd $EXEC_DIR
-# monitor.js is supposed not to be executed?
-# sleep 1
-# cd monitor
-# node monitor.js &
-# cd $EXEC_DIR
-
-
-
-
-
