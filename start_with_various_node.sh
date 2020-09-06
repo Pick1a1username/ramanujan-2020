@@ -56,13 +56,6 @@ function node4() {
 
   run_app index/index-service.js $HOST $BASES $OPTS
   sleep 1
-  run_app timeline/timeline-service.js 0 $HOST $BASES $OPTS
-  sleep 1
-  run_app timeline/timeline-service.js 1 $HOST $BASES $OPTS
-  sleep 1
-  run_app timeline/timeline-shard-service.js $HOST $BASES $OPTS
-  sleep 1
-
 
   # monitor.js is supposed not to be executed?
   # sleep 1
@@ -105,6 +98,13 @@ function node12() {
   sleep 3
   run_app search/search-service.js 0 $HOST $BASES $OPTS
   sleep 3
+  run_app timeline/timeline-service.js 0 $HOST $BASES $OPTS
+  sleep 1
+  run_app timeline/timeline-service.js 1 $HOST $BASES $OPTS
+  sleep 1
+  run_app timeline/timeline-shard-service.js $HOST $BASES $OPTS
+  sleep 1
+
 }
 
 
